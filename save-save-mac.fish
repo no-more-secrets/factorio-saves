@@ -31,15 +31,19 @@ set -l msg "$argv[1]"
 set -l library_factorio "/Users/dsicilia/Library/Application Support/factorio"
 set -l saves_link       "/Users/dsicilia/Library/Application Support/factorio/saves"
 set -l factorio_saves   "/Users/dsicilia/games/factorio-saves"
+set -l blueprint_storage "blueprint-storage.dat"
+set -l save_zip          "saves/dsicilia.zip"
 
 ensure_folder_exists $library_factorio
 ensure_folder_exists $factorio_saves
 ensure_link_exists $saves_link
 
-set -l blueprint_storage "blueprint-storage.dat"
-set -l save_zip          "saves/dsicilia.zip"
+cp "$library_factorio/$blueprint_storage" "$factorio_saves/$blueprint_storage"
+or die "failed to copy $library_factorio/$blueprint_storage to $factorio_saves/$blueprint_storage"
 
 cd $factorio_saves; or die "failed to change to directory $factorio_saves"
+
+git status; or die "failed to run git status"
 
 ensure_file_exists $blueprint_storage
 ensure_file_exists $save_zip
