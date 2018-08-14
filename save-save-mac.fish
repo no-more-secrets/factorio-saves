@@ -1,4 +1,9 @@
 #!/usr/bin/env fish
+# This script will copy the blueprint-storage.dat from the game folder
+# and will commit/push it along with the save file (zip).  Note that
+# we don't copy the game save because it is expected that there is a
+# symlink from the game folder to the repo folder so that the save files
+# are automatically up to date in the repo folder.
 
 function die
     echo -e "$argv" 1>&2
